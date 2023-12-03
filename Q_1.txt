@@ -1,0 +1,43 @@
+Q.1 Write a java program to implement Adapter pattern to design Heart Model to Beat 
+Model
+
+Ans -> 
+
+// Target Interface (BeatModel)
+public interface BeatModel {
+    void beat();
+}
+
+// Adaptee (HeartModel)
+public class HeartModel {
+    public void heartBeat() {
+        System.out.println("Heart is beating.");
+    }
+}
+
+// Adapter
+public class HeartAdapter implements BeatModel {
+    private HeartModel heartModel;
+
+    public HeartAdapter(HeartModel heartModel) {
+        this.heartModel = heartModel;
+    }
+
+    @Override
+    public void beat() {
+        heartModel.heartBeat();
+    }
+}
+
+// Client Code
+public class AdapterPatternExample {
+    public static void main(String[] args) {
+        HeartModel heartModel = new HeartModel();
+        BeatModel beatModel = new HeartAdapter(heartModel);
+
+        // Now, you can use beat() method on BeatModel interface,
+        // and it will delegate the call to heartBeat() in HeartModel.
+        beatModel.beat();
+    }
+}
+
